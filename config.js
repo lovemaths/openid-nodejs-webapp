@@ -26,8 +26,6 @@ exports.creds = {
 
   clientID: 'client-001',
 
-  clientSecret: 'secret-001',
-
   responseType: 'id_token', 
 
   responseMode: 'form_post', 
@@ -43,6 +41,8 @@ exports.creds = {
   scope: null,
 
   loggingLevel: 'info',
+
+  clientSecret: 'secret-001',
 
   jweKeyStore: [ 
     { 'kid': 'sym_key_256', 'kty': 'oct', 'k': 'WIVds2iwJPwNhgUgwZXmn/46Ql1EkiL+M+QqDRdQURE=' }, 
