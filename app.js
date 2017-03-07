@@ -68,25 +68,27 @@ var findBySub = function(sub, fn) {
   return fn(null, null);
 };
 
-passport.use(new OIDCStrategy({
-    identityMetadata: config.creds.identityMetadata,
-    clientID: config.creds.clientID,
-    responseType: config.creds.responseType,
-    responseMode: config.creds.responseMode,
-    redirectUrl: config.creds.redirectUrl,
-    allowHttpForRedirectUrl: config.creds.allowHttpForRedirectUrl,
-    clientSecret: config.creds.clientSecret,
-    validateIssuer: config.creds.validateIssuer,
-    isB2C: config.creds.isB2C,
-    issuer: config.creds.issuer,
-    passReqToCallback: config.creds.passReqToCallback,
-    scope: config.creds.scope,
-    thumbprint: config.creds.thumbprint,
-    privatePEMKey: config.creds.privatePEMKey,
-    loggingLevel: config.creds.loggingLevel,
-    nonceLifetime: config.creds.nonceLifetime,
-    jweKeyStore: config.creds.jweKeyStore
-  },
+var OIDCoptions = {
+  identityMetadata: config.creds.identityMetadata,
+  clientID: config.creds.clientID,
+  responseType: config.creds.responseType,
+  responseMode: config.creds.responseMode,
+  redirectUrl: config.creds.redirectUrl,
+  allowHttpForRedirectUrl: config.creds.allowHttpForRedirectUrl,
+  clientSecret: config.creds.clientSecret,
+  validateIssuer: config.creds.validateIssuer,
+  isB2C: config.creds.isB2C,
+  issuer: config.creds.issuer,
+  passReqToCallback: config.creds.passReqToCallback,
+  scope: config.creds.scope,
+  thumbprint: config.creds.thumbprint,
+  privatePEMKey: config.creds.privatePEMKey,
+  loggingLevel: config.creds.loggingLevel,
+  nonceLifetime: config.creds.nonceLifetime,
+  jweKeyStore: config.creds.jweKeyStore
+};
+
+passport.use(new OIDCStrategy(OIDCoptions,
   function(iss, sub, profile, accessToken, refreshToken, done) {
     if (!profile.sub) {
       return done(new Error("No sub found"), null);
@@ -133,7 +135,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/account', ensureAuthenticated, function(req, res) {
-  res.render('account', { user: req.user });
+  res.render('account', { user: req.user, responseType: OIDCoptions.responseType });
 });
 
 app.get('/login',
@@ -169,7 +171,7 @@ var testCases = {
   8: "{ 'JWE_alg': 'RSA1_5', 'JWE_alg_key_kid': 'rsa_key', 'JWE_enc': 'A128CBC-HS256' }",
 };
 
-app.get('/:id',
+app.get('/t/:id',
   function(req, res, next) {
     req.logout();
 

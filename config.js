@@ -6,7 +6,7 @@ exports.creds = {
 
   clientSecret: 'secret-001',
 
-  responseType: 'code', 
+  responseType: 'id_token', 
 
   responseMode: 'form_post', 
 

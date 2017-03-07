@@ -3,8 +3,12 @@
 	<a href="/login">Log In</a>
 <% } else { %>
 <p>UPN: <%= user._json.upn %></p>
-<p>Full Claimes</p>
-<%- JSON.stringify(user) %>
+<% if (responseType === 'id_token') { %>
+<p> id_token has claims: <p>
+<% } else { %>
+<p>User info json: </p>
+<% } %>
+<%- JSON.stringify(user._json) %>
 <p></p>
 <a href="/logout">Log Out</a>
 <% } %>
