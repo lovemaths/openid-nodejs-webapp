@@ -1,3 +1,25 @@
+exports.creds = {
+  identityMetadata: 'https://login.microsoftonline.com/sijun.onmicrosoft.com/.well-known/openid-configuration', 
+
+  clientID: '683ead13-3193-43f0-9677-d727c25a588f',
+
+  responseType: 'id_token', 
+
+  responseMode: 'form_post', 
+
+  redirectUrl: 'http://localhost:3000/auth/openid/return', 
+
+  allowHttpForRedirectUrl: true,
+  
+  validateIssuer: true,
+
+  passReqToCallback: false,
+
+  scope: null,
+
+  loggingLevel: 'info',
+};
+
 
 exports.creds = {
   identityMetadata: 'https://testingsts.azurewebsites.net/.well-known/openid-configuration', 
